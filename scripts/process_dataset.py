@@ -110,8 +110,8 @@ def run_preprocess(input_dir, output_dir, workers):
 if __name__ == "__main__":
     # Set up argument parsing
     parser = argparse.ArgumentParser(description="Prepare dataset for training.")
-    parser.add_argument("--command", type=str, choices=["save", "preprocess"], required=True,
-                        help="Command to execute: 'save' or 'preprocess'")
+    # parser.add_argument("--command", type=str, choices=["save", "preprocess"], required=True,
+    #                     help="Command to execute: 'save' or 'preprocess'")
     parser.add_argument("--output_dir", type=str, default="./data/vin100h-preprocessed-v2",
                         help="Output directory for save command")
     parser.add_argument("--base_model", type=str, default="htdung167/vin100h-preprocessed-v2",
@@ -131,7 +131,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.command == "save":
-        save_dataset_to_local_disk(args.output_dir, args.base_model, args.audio_header, args.text_header)
-    elif args.command == "preprocess":
-        run_preprocess(args.prepare_csv_input_dir, args.prepare_csv_output_dir, args.workers)
+    # if args.command == "save":
+    save_dataset_to_local_disk(args.output_dir, args.base_model, args.audio_header, args.text_header)
+    # elif args.command == "preprocess":
+    run_preprocess(args.prepare_csv_input_dir, args.prepare_csv_output_dir, args.workers)
