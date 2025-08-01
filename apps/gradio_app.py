@@ -3,19 +3,33 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
+from transformers import WhisperProcessor, WhisperForConditionalGeneration
+import librosa
+
+def transcribe_audio(audio_file_path):
+    """Transcribe audio using PhoWhisper-tiny model."""
+    try:
+        processor = WhisperProcessor.from_pretrained("vinai/PhoWhisper-tiny")
+        model = WhisperForConditionalGeneration.from_pretrained("vinai/PhoWhisper-tiny")
+        audio, sr = librosa.load(audio_file_path, sr=16000)
+        input_features = processor(audio, sampling_rate=16000, return_tensors="pt").input_features
+        forced_decoder_ids = processor.get_decoder_prompt_ids(language="vi", task="transcribe")
+        predicted_ids = model.generate(input_features, forced_decoder_ids=forced_decoder_ids)
+        transcription = processor.batch_decode(predicted_ids, skip_special_tokens=True)
+        return transcription[0] if transcription else ""
+    except Exception as e:
+        return f"Error during transcription: {str(e)}"
 
 def run_tts_inference(ref_audio, ref_text, gen_text, speed, model_option):
     """
     Run the F5-TTS inference script with provided inputs and return the output audio path.
     """
-    # Define model configurations based on the selected option
     model_configs = {
         "Vietnamese Fine-Tuned": {
             "model_cfg": "ckpts/vi-fine-tuned-f5-tts.yaml",
-            "ckpt_file": "ckpts/Vi_F5_TTS_ckpts/model_last.pt",
+            "ckpt_file": "ckpts/Vi_F5_TTS_ckpts/pruning_model.pt",
             "vocab_file": "ckpts/vocab.txt"
         },
-        # Add more model options here if needed
     }
     
     if model_option not in model_configs:
@@ -23,19 +37,16 @@ def run_tts_inference(ref_audio, ref_text, gen_text, speed, model_option):
     
     config = model_configs[model_option]
     
-    # Create temporary directory for input and output files
     output_dir = "apps/gradio_app/temp_data"
     os.makedirs(output_dir, exist_ok=True)
     output_file = "infer_audio.mp3"
     output_path = os.path.join(output_dir, output_file)
     
-    # Use the provided ref_audio path directly (it's already a file path)
     if ref_audio:
-        temp_audio = ref_audio  # No need to save, it's already a file path
+        temp_audio = ref_audio
     else:
         return None, "Reference audio is required"
     
-    # Save reference and generated text to temporary files
     with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as temp_ref_text:
         temp_ref_text.write(ref_text or "")
         temp_ref_text_path = temp_ref_text.name
@@ -45,7 +56,6 @@ def run_tts_inference(ref_audio, ref_text, gen_text, speed, model_option):
         temp_gen_text_path = temp_gen_text.name
     
     try:
-        # Construct the command
         command = [
             "python", "src/f5_tts/infer/infer_cli.py",
             "--model_cfg", config["model_cfg"],
@@ -54,12 +64,11 @@ def run_tts_inference(ref_audio, ref_text, gen_text, speed, model_option):
             "--ref_audio", temp_audio,
             "--ref_text", temp_ref_text_path,
             "--gen_text", temp_gen_text_path,
-            "--speed", str(speed),
+            # "--speed", str(speed),
             "--output_dir", output_dir,
             "--output_file", output_file
         ]
         
-        # Run the inference command
         result = subprocess.run(command, capture_output=True, text=True)
         
         if result.returncode != 0:
@@ -74,7 +83,6 @@ def run_tts_inference(ref_audio, ref_text, gen_text, speed, model_option):
         return None, f"Error during inference: {str(e)}"
     
     finally:
-        # Clean up temporary text files (but not the ref_audio, as it's managed by Gradio)
         if os.path.exists(temp_ref_text_path):
             os.remove(temp_ref_text_path)
         if os.path.exists(temp_gen_text_path):
@@ -82,15 +90,22 @@ def run_tts_inference(ref_audio, ref_text, gen_text, speed, model_option):
 
 def create_gradio_app():
     """
-    Create and return a Gradio interface for the F5-TTS inference.
+    Create and return a Gradio interface for the F5-TTS inference with optional Whisper ASR.
     """
+    def update_ref_text(audio_file_path, use_whisper):
+        """Conditionally transcribe audio based on Whisper checkbox."""
+        if use_whisper and audio_file_path:
+            return transcribe_audio(audio_file_path)
+        return gr.update()  # Keep current text if Whisper is disabled or no audio
+
     with gr.Blocks() as demo:
         gr.Markdown("# F5-TTS Audio Generation App")
-        gr.Markdown("Generate audio using a fine-tuned F5-TTS model. Upload a reference audio, provide reference and generated text, and adjust the speed.")
-        
+        gr.Markdown("Generate audio using a fine-tuned F5-TTS model. Upload a reference audio, enable Whisper ASR for auto-transcription or manually enter reference text, provide generated text, and adjust the speed.")
+
         with gr.Row():
             with gr.Column():
                 ref_audio = gr.Audio(label="Reference Audio", type="filepath")
+                use_whisper = gr.Checkbox(label="Use Whisper ASR for Reference Text", value=False)
                 ref_text = gr.Textbox(label="Reference Text", placeholder="e.g., Sau nhà Ngô, lần lượt các triều Đinh...")
                 gen_text = gr.Textbox(label="Generated Text", placeholder="e.g., Nhà Tiền Lê, Lý và Trần đã chống trả...")
                 speed = gr.Slider(0.5, 2.0, 1.0, step=0.1, label="Speed")
@@ -105,6 +120,18 @@ def create_gradio_app():
                 output_audio = gr.Audio(label="Generated Audio")
                 output_text = gr.Textbox(label="Status")
         
+        # Update reference text when audio is uploaded or Whisper checkbox changes
+        ref_audio.change(
+            fn=update_ref_text,
+            inputs=[ref_audio, use_whisper],
+            outputs=ref_text
+        )
+        use_whisper.change(
+            fn=update_ref_text,
+            inputs=[ref_audio, use_whisper],
+            outputs=ref_text
+        )
+        
         generate_btn.click(
             fn=run_tts_inference,
             inputs=[ref_audio, ref_text, gen_text, speed, model_option],
@@ -115,4 +142,4 @@ def create_gradio_app():
 
 if __name__ == "__main__":
     demo = create_gradio_app()
-    demo.launch()
+    demo.launch(share=True)
