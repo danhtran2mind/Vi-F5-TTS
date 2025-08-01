@@ -1,0 +1,8 @@
+# # Step 1: Set Up the Environment
+# os.system("pip install -e . >/dev/null 2>&1")
+# os.system("pip install torch==2.4.0+cu124 torchaudio==2.4.0+cu124 torchvision==0.19.0+cu124 --extra-index-url https://download.pytorch.org/whl/cu124 >/dev/null 2>&1")
+# os.system("pip install accelerate==0.33.0 tensorboard >/dev/null 2>&1")
+# if not os.path.exists("F5-TTS"):
+#     os.system("git clone https://github.com/danhtran2mind/F5-TTS.git")
+# os.chdir("F5-TTS")
+# os.system("pip install -e . >/dev/null 2>&1")
