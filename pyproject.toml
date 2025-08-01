@@ -33,7 +33,7 @@ dependencies = [
     "soundfile",
     "tomli",
     "torch>=2.4.0",
-    "torchaudio>=24.0",
+    "torchaudio>=2.4.0",
     "torchvision>=0.19.0",
     "torchdiffeq",
     "tqdm>=4.65.0",

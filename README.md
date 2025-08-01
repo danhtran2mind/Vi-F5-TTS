@@ -76,7 +76,7 @@ accelerate launch ./src/f5_tts/train/finetune_cli.py \
     --keep_last_n_checkpoints 1 \
     --last_per_updates 4000 \
     --log_samples \
-    --pretrain "<your_pretrain_model_path>" # such as./ckpts/F5TTS_v1_Base_no_zero_init/model_1250000.safetensors
+    --pretrain "<your_pretrain_model_path>" # such as "./ckpts/F5TTS_v1_Base_no_zero_init/model_1250000.safetensors"
 ```
 - Training Hyperparameters
 Refer to the [Training Documents](docs/training/training_doc.md) for detailed hyperparameters used in fine-tuning the model. ⚙️

@@ -1,5 +1,0 @@
-# Ignore everything
-*
-
-# If you want to track the .gitignore file itself, unignore it
-!.gitignore
