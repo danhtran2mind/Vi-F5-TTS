@@ -53,11 +53,11 @@ accelerate config default
 ```
 Create `configs` folder in `src/f5_tts`:
 
-```bash
+<!-- ```bash
 mkdir -p src/f5_tts/configs
 cp configs/configs/vi-fine-tuned-f5-tts.yaml src/f5_tts/configs
-```
-To train the model:
+``` -->
+- To train the model:
 ```bash
 accelerate launch ./src/f5_tts/train/finetune_cli.py \
     --exp_name F5TTS_Base \
@@ -76,8 +76,31 @@ accelerate launch ./src/f5_tts/train/finetune_cli.py \
     --keep_last_n_checkpoints 1 \
     --last_per_updates 4000 \
     --log_samples \
-    --pretrain "<your_pretrain_model_path>" # such as "./ckpts/F5TTS_v1_Base_no_zero_init/model_1250000.safetensors"
+    --pretrain "./ckpts/F5TTS_v1_Base_no_zero_init/model_1250000.safetensors"
 ```
+- Example Training:
+```bash
+accelerate launch ./src/f5_tts/train/finetune_cli.py \
+    --exp_name F5TTS_Base \
+    --dataset_name vin100h-preprocessed-v2 \
+    --finetune \
+    --tokenizer pinyin \
+    --learning_rate 1e-05 \
+    --batch_size_type frame \
+    --batch_size_per_gpu 3200 \
+    --max_samples 64 \
+    --grad_accumulation_steps 2 \
+    --max_grad_norm 1 \
+    --epochs 80 \
+    --num_warmup_updates 2761 \
+    --save_per_updates 4000 \
+    --keep_last_n_checkpoints 1 \
+    --last_per_updates 4000 \
+    --log_samples \
+    --pretrain "./ckpts/F5TTS_v1_Base_no_zero_init/model_1250000.safetensors"
+```
+
+
 - Training Hyperparameters
 Refer to the [Training Documents](docs/training/training_doc.md) for detailed hyperparameters used in fine-tuning the model. ⚙️
 

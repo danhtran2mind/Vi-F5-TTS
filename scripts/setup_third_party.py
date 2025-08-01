@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 import argparse
 import sys
@@ -25,14 +26,22 @@ def clone_repository(repo_url, target_dir, branch="main"):
 
 def main(args):
     # Define target directories
-    f5_tts_target_dir = os.path.join("src", "f5_tts")
+    temp_f5_tts_target_dir = os.path.join("src", "danhtran2mind_f5_tts")
     bigvgan_target_dir = os.path.join("src", "third_party", "BigVGAN")
-    
+    src_in_src = os.path.join(temp_f5_tts_target_dir, "src", "f5_tts")
+    f5_tts_target_dir = os.path.join("src", "f5_tts")
+
     # Clone F5-TTS repository
-    clone_repository(args.f5_tts_url, f5_tts_target_dir, args.f5_tts_branch)
+    clone_repository(args.f5_tts_url, temp_f5_tts_target_dir, args.f5_tts_branch)
     
     # Clone BigVGAN repository
     clone_repository(args.bigvgan_url, bigvgan_target_dir, args.bigvgan_branch)
+    
+    # Move the directory
+    shutil.move(src_in_src, f5_tts_target_dir)
+    # Remove the parent directory
+    shutil.rmtree(src_in_src)
+    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Clone F5-TTS and BigVGAN repositories")
