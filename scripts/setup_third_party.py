@@ -38,6 +38,7 @@ def main(args):
     
     # Move the directory
     shutil.move(os.path.join(temp_f5_tts_target_dir, "src", "f5_tts"), f5_tts_target_dir)
+    shutil.move(os.path.join(temp_f5_tts_target_dir, "data"), ".")
     # Remove the parent directory
     shutil.rmtree(temp_f5_tts_target_dir)
 
