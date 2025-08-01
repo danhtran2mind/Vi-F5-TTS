@@ -1,0 +1,103 @@
+/* General body styling */
+.gradio-container {
+    background: linear-gradient(180deg, #f9fafb, #edade9);
+    font-family: 'Quicksand', ui-sans-serif, sans-serif;
+    color: #6b46c1; /* Purple-800 for text (neutral hue) */
+    font-size: 16px; /* Medium text size */
+    font-weight: 400;
+}
+
+/* Dark mode background */
+@media (prefers-color-scheme: dark) {
+    .gradio-container {
+        background: linear-gradient(180deg, #1f2937, #111827);
+        color: #d6bcfa; /* Lighter purple for dark mode */
+    }
+}
+
+/* Block styling (containers for components) */
+.block {
+    border: 1px solid #e9d8fd; /* Purple-200 for borders */
+    border-radius: 8px; /* Medium radius */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Small shadow */
+    padding: 16px; /* Medium spacing */
+    background: #edade9;
+}
+
+/* Input fields */
+input[type="text"], textarea {
+    background: #faf5ff; /* Purple-50 for input background */
+    border: 1px solid #e9d8fd; /* Purple-200 for borders */
+    border-radius: 8px;
+    padding: 8px;
+    font-family: 'Quicksand', ui-sans-serif, sans-serif;
+    font-size: 16px;
+    color: #6b46c1;
+    box-shadow: none;
+}
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Small shadow on focus */
+    border-color: #48bb78; /* Green-400 for focus */
+}
+
+/* Primary button */
+button.primary {
+    background: #48bb78; /* Green-400 */
+    color: #edade9;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'Quicksand', ui-sans-serif, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+button.primary:hover {
+    background: #ed8936; /* Orange-400 for hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Medium shadow on hover */
+}
+
+/* Secondary button */
+button.secondary {
+    background: transparent;
+    color: #48bb78; /* Green-400 for text */
+    border: 1px solid #48bb78; /* Green-400 for border */
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'Quicksand', ui-sans-serif, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+button.secondary:hover {
+    background: #ed8936; /* Orange-400 for hover */
+    color: #edade9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Slider styling */
+input[type="range"] {
+    accent-color: #ed8936; /* Orange-400 for slider */
+}
+@media (prefers-color-scheme: dark) {
+    input[type="range"] {
+        accent-color: #f6ad55; /* Orange-600 for dark mode */
+    }
+}
+
+/* Markdown headers */
+h2 {
+    font-weight: 500;
+    color: #6b46c1; /* Purple-800 */
+    margin-bottom: 16px;
+}
+
+/* Code or monospace elements */
+code, pre {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}

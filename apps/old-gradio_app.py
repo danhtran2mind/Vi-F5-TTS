@@ -82,11 +82,6 @@ def run_tts_inference(ref_audio, ref_text, gen_text, speed, model_option):
     except Exception as e:
         return None, f"Error during inference: {str(e)}"
     
-    finally:
-        if os.path.exists(temp_ref_text_path):
-            os.remove(temp_ref_text_path)
-        if os.path.exists(temp_gen_text_path):
-            os.remove(temp_gen_text_path)
 
 def create_gradio_app():
     """
