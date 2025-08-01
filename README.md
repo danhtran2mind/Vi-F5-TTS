@@ -97,7 +97,7 @@ Run the following scripts to set up the project:
     ```bash
     python scripts/download_ckpts.py \
         --repo_id "danhtran2mind/Vi-F5-TTS" \
-        --local_dir "./ckpts" --download_all
+        --local_dir "./ckpts" --pruning_model
     ```
 
 - **Prepare Dataset (Optional, for Training)**  
