@@ -110,24 +110,24 @@ def run_preprocess(input_dir, output_dir, workers):
 if __name__ == "__main__":
     # Set up argument parsing
     parser = argparse.ArgumentParser(description="Prepare dataset for training.")
-    subparsers = parser.add_subparsers(dest="command", help="Subcommands")
-
-    # Subcommand to save dataset to local disk
-    save_parser = subparsers.add_parser("save", help="Save dataset to local disk")
-    save_parser.add_argument("--output_dir", type=str, default="./data/vin100h-preprocessed-v2", help="Output directory")
-    save_parser.add_argument("--base_model", type=str, default="htdung167/vin100h-preprocessed-v2", help="Base model")
-    save_parser.add_argument("--audio_header", type=str, default="audio", help="Audio header")
-    save_parser.add_argument("--text_header", type=str, default="preprocessed_sentence_v2", help="Text header")
-
-    # Subcommand to run preprocessing
-    preprocess_parser = subparsers.add_parser("preprocess", help="Run preprocessing script")
-    preprocess_parser.add_argument("--prepare_csv_input_dir", type=str,
-                                  default="./data/vin100h-preprocessed-v2",
-                                  help="Input directory for preprocessing")
-    preprocess_parser.add_argument("--prepare_csv_output_dir", type=str,
-                                  default="./data/vin100h-preprocessed-v2_pinyin",
-                                  help="Output directory for processed data")
-    preprocess_parser.add_argument("--workers", type=int, default=4, help="Number of parallel processes")
+    parser.add_argument("--command", type=str, choices=["save", "preprocess"], required=True,
+                        help="Command to execute: 'save' or 'preprocess'")
+    parser.add_argument("--output_dir", type=str, default="./data/vin100h-preprocessed-v2",
+                        help="Output directory for save command")
+    parser.add_argument("--base_model", type=str, default="htdung167/vin100h-preprocessed-v2",
+                        help="Base model for save command")
+    parser.add_argument("--audio_header", type=str, default="audio",
+                        help="Audio header for save command")
+    parser.add_argument("--text_header", type=str, default="preprocessed_sentence_v2",
+                        help="Text header for save command")
+    parser.add_argument("--prepare_csv_input_dir", type=str,
+                        default="./data/vin100h-preprocessed-v2",
+                        help="Input directory for preprocess command")
+    parser.add_argument("--prepare_csv_output_dir", type=str,
+                        default="./data/vin100h-preprocessed-v2_pinyin",
+                        help="Output directory for preprocess command")
+    parser.add_argument("--workers", type=int, default=4,
+                        help="Number of parallel processes for preprocess command")
 
     args = parser.parse_args()
 
@@ -135,5 +135,3 @@ if __name__ == "__main__":
         save_dataset_to_local_disk(args.output_dir, args.base_model, args.audio_header, args.text_header)
     elif args.command == "preprocess":
         run_preprocess(args.prepare_csv_input_dir, args.prepare_csv_output_dir, args.workers)
-    else:
-        parser.print_help()
