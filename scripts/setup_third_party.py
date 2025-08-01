@@ -28,7 +28,6 @@ def main(args):
     # Define target directories
     temp_f5_tts_target_dir = os.path.join("src", "danhtran2mind_f5_tts")
     bigvgan_target_dir = os.path.join("src", "third_party", "BigVGAN")
-    src_in_src = os.path.join(temp_f5_tts_target_dir, "src", "f5_tts")
     f5_tts_target_dir = os.path.join("src", "f5_tts")
 
     # Clone F5-TTS repository
@@ -38,10 +37,10 @@ def main(args):
     clone_repository(args.bigvgan_url, bigvgan_target_dir, args.bigvgan_branch)
     
     # Move the directory
-    shutil.move(src_in_src, f5_tts_target_dir)
+    shutil.move(os.path.join(temp_f5_tts_target_dir, "src", "f5_tts"), f5_tts_target_dir)
     # Remove the parent directory
-    shutil.rmtree(src_in_src)
-    
+    shutil.rmtree(temp_f5_tts_target_dir)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Clone F5-TTS and BigVGAN repositories")
