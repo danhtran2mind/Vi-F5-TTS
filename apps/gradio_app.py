@@ -5,6 +5,7 @@ from gradio_app.components import (
     run_setup_script
 )
 from gradio_app.asr_utils import transcribe_audio
+from pathlib import Path
 
 def create_gradio_app():
     """Create Gradio interface for F5-TTS inference with Whisper ASR."""
@@ -27,10 +28,53 @@ def create_gradio_app():
             gr.update(visible=use_upload)
         )
 
+    def load_example(ref_audio_path, ref_text, inf_text):
+        """Load example inputs and retrieve corresponding infer_audio for output."""
+        # Find the matching example folder to get infer_audio
+        example_dirs = [
+            Path("apps/gradio_app/assets/examples/f5_tts/1"),
+            Path("apps/gradio_app/assets/examples/f5_tts/2"),
+            Path("apps/gradio_app/assets/examples/f5_tts/3"),
+            Path("apps/gradio_app/assets/examples/f5_tts/4")
+        ]
+        inf_audio_path = None
+        for dir_path in example_dirs:
+            if dir_path.exists():
+                ref_audio = next((f for f in dir_path.glob("refer_audio.*") if f.suffix in [".mp3", ".wav"]), None)
+                if ref_audio and str(ref_audio) == ref_audio_path:
+                    inf_audio = next((f for f in dir_path.glob("infer_audio.*") if f.suffix in [".mp3", ".wav"]), None)
+                    inf_audio_path = str(inf_audio) if inf_audio else None
+                    break
+                
+        return ref_audio_path, ref_text, inf_text, inf_audio_path
+
+    # Prepare examples for gr.Examples (exclude infer_audio from table)
+    example_dirs = [
+        Path("apps/gradio_app/assets/examples/f5_tts/1"),
+        Path("apps/gradio_app/assets/examples/f5_tts/2"),
+        Path("apps/gradio_app/assets/examples/f5_tts/3"),
+        Path("apps/gradio_app/assets/examples/f5_tts/4")
+    ]
+    examples = []
+    for dir_path in example_dirs:
+        if not dir_path.exists():
+            continue
+        # Read text files
+        ref_text = (dir_path / "refer_text.txt").read_text(encoding="utf-8") if (dir_path / "refer_text.txt").exists() else ""
+        inf_text = (dir_path / "infer_text.txt").read_text(encoding="utf-8") if (dir_path / "infer_text.txt").exists() else ""
+        # Find audio files (mp3 or wav)
+        ref_audio = next((f for f in dir_path.glob("refer_audio.*") if f.suffix in [".mp3", ".wav"]), None)
+        examples.append([
+            str(ref_audio) if ref_audio else None,
+            ref_text,
+            inf_text
+        ])
+
     CSS = open("apps/gradio_app/static/styles.css", "r").read()
     with gr.Blocks(css=CSS) as demo:
         gr.Markdown("# F5-TTS Audio Generation")
         gr.Markdown("Generate high-quality audio with a fine-tuned F5-TTS model. Upload reference audio, use Whisper ASR for transcription, enter text, adjust speed, and select or upload model files.")
+        
         with gr.Row():
             with gr.Column():
                 ref_audio = gr.Audio(label="Reference Audio", type="filepath")
@@ -75,6 +119,17 @@ def create_gradio_app():
                     ckpt_file_upload = gr.File(label="Checkpoint File (*.pt or *.safetensors)", file_types=[".pt", ".safetensors"], visible=False)
                     vocab_file_upload = gr.File(label="Vocab File (*.txt or *.safetensors)", file_types=[".txt", ".safetensors"], visible=False)
         
+        # Add Examples component after both columns
+        gr.Examples(
+            examples=examples,
+            inputs=[ref_audio, ref_text, gen_text],
+            outputs=[ref_audio, ref_text, gen_text, output_audio],  # Keep output_audio to display infer_audio
+            fn=load_example,
+            label="Example Inputs",
+            examples_per_page=4,
+            cache_examples=False
+        )
+        
         ref_audio.change(fn=update_ref_text, inputs=[ref_audio, use_whisper], outputs=ref_text)
         use_whisper.change(fn=update_ref_text, inputs=[ref_audio, use_whisper], outputs=ref_text)
         use_upload.change(
@@ -91,4 +146,4 @@ def create_gradio_app():
 
 if __name__ == "__main__":
     demo = create_gradio_app()
-    demo.launch()
+    demo.launch(share=True)
