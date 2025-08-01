@@ -13,6 +13,7 @@ def run_setup_script():
         result = subprocess.run(["python", setup_script], capture_output=True, text=True, check=True)
         return result.stdout
     except subprocess.CalledProcessError as e:
+        print(f"Setup script failed with error: {e.stderr}")
         return f"Setup script failed: {e.stderr}"
 
 

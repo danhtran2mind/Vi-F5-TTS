@@ -10,7 +10,7 @@ from pathlib import Path
 def create_gradio_app():
     """Create Gradio interface for F5-TTS inference with Whisper ASR."""
     # Run setup script to ensure dependencies are installed
-    run_setup_script()
+    result_setup = run_setup_script()
 
     # Function to update reference text based on audio file and Whisper checkbox
     def update_ref_text(audio_file_path, use_whisper):
