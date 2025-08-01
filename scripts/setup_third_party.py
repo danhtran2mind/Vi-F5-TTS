@@ -24,6 +24,10 @@ def clone_repository(repo_url, target_dir, branch="main"):
         print(f"Failed to clone repository: {e.stderr}")
         sys.exit(1)
 
+def handle_remove_readonly(func, path, _):
+    os.chmod(path, 0o666)
+    func(path)
+
 def main(args):
     # Define target directories
     temp_f5_tts_target_dir = os.path.join("src", "danhtran2mind_f5_tts")
@@ -38,10 +42,10 @@ def main(args):
     
     # Move the directory
     shutil.move(os.path.join(temp_f5_tts_target_dir, "src", "f5_tts"), f5_tts_target_dir)
-    shutil.move(os.path.join(temp_f5_tts_target_dir, "data"), ".")
+    shutil.copytree(os.path.join(temp_f5_tts_target_dir, "data"), "./data", dirs_exist_ok=True)
     # Remove the parent directory
-    shutil.rmtree(temp_f5_tts_target_dir)
-
+    # shutil.rmtree(temp_f5_tts_target_dir)
+    shutil.rmtree(temp_f5_tts_target_dir, onerror=handle_remove_readonly)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Clone F5-TTS and BigVGAN repositories")

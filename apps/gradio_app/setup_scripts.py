@@ -35,17 +35,18 @@ def main():
     scripts_dir = "scripts"
     scripts = [
         {
-            "path": os.path.join(scripts_dir, "setup_third_party.py"),
-            "args": None
-        },
-        {
             "path": os.path.join(scripts_dir, "download_ckpts.py"),
             "args": [
                 "--repo_id", "danhtran2mind/Vi-F5-TTS",
                 "--local_dir", "./ckpts",
                 "--pruning_model"
             ]
+        },
+        {
+            "path": os.path.join(scripts_dir, "setup_third_party.py"),
+            "args": None
         }
+        
     ]
 
     for script in scripts:
