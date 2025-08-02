@@ -165,12 +165,16 @@ Refer to the [Inference Documents](docs/inference/inference_doc.md) for detailed
 
 Listen to the reference audio: [Play Audio](https://huggingface.co/danhtran2mind/All-Assets/resolve/main/Vi-F5-TTS/examples/f5_tts/1/refer_audio.mp3)
 
-<dive>
+<div>
 <audio controls>
   <source src="https://huggingface.co/danhtran2mind/All-Assets/resolve/main/Vi-F5-TTS/examples/f5_tts/1/refer_audio.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 </div>
+
+https://github.com/ExponentialML/Text-To-Video-Finetuning/assets/59846140/55608f6a-333a-458f-b7d5-94461c5da8bb
+
+
 ## Limitation
 
 - **Dataset Constraints**: The model is trained on the `vin100h-preprocessed-v2` dataset, which, while useful, is limited in size and diversity. This can result in suboptimal audio quality, particularly in capturing varied intonations, accents, and emotional nuances specific to Vietnamese speech.
