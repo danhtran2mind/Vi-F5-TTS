@@ -4,20 +4,6 @@ import subprocess
 import argparse
 import sys
 
-def install_editable_package():
-    """Install the f5-tts package in editable mode without dependencies."""
-    try:
-        subprocess.run(
-            [sys.executable, "-m", "pip", "install", "-e", ".", "--no-deps"],
-            check=True,
-            capture_output=True,
-            text=True
-        )
-        print("Successfully installed f5-tts package in editable mode")
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to install f5-tts package: {e.stderr}")
-        sys.exit(1)
-
 def clone_repository(repo_url, target_dir, branch="main"):
     """Clone a git repository to the specified directory with specific branch."""
     if os.path.exists(target_dir):
@@ -42,15 +28,6 @@ def handle_remove_readonly(func, path, _):
     os.chmod(path, 0o666)
     func(path)
 
-def setup_python_path():
-    """Add the src directory to sys.path to allow module imports."""
-    src_dir = os.path.abspath("src")
-    if src_dir not in sys.path:
-        sys.path.insert(0, src_dir)
-        print(f"Added {src_dir} to sys.path")
-    else:
-        print(f"{src_dir} already in sys.path")
-
 def main(args):
     # Define target directories
     temp_f5_tts_target_dir = os.path.join("src", "danhtran2mind_f5_tts")
@@ -66,17 +43,16 @@ def main(args):
     # Move the directory
     shutil.move(os.path.join(temp_f5_tts_target_dir, "src", "f5_tts"), f5_tts_target_dir)
     shutil.copytree(os.path.join(temp_f5_tts_target_dir, "data"), "./data", dirs_exist_ok=True)
+    # Remove the parent directory
     # Remove the nested f5_tts directory
     if os.path.exists(os.path.join(f5_tts_target_dir, "f5_tts")):
         shutil.rmtree(os.path.join(f5_tts_target_dir, "f5_tts"), onerror=handle_remove_readonly)
+
     # Remove the parent directory
     shutil.rmtree(temp_f5_tts_target_dir, onerror=handle_remove_readonly)
 
-    # Set up Python path to include src directory
-    install_editable_package()
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Clone F5-TTS and BigVGAN repositories and set up Python path")
+    parser = argparse.ArgumentParser(description="Clone F5-TTS and BigVGAN repositories")
     parser.add_argument(
         "--f5-tts-url",
         default="https://github.com/danhtran2mind/F5-TTS",
@@ -94,6 +70,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--bigvgan-branch",
+        # default="7d2b454564a6c7d014227f635b7423881f14bdac",
         default="main",
         help="Branch or commit for BigVGAN repository"
     )
