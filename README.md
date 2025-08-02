@@ -152,28 +152,58 @@ python src/f5_tts/infer/infer_cli.py \
 ```
 #### Inference Arguments
 Refer to the [Inference Documents](docs/inference/inference_doc.md) for detailed arguments used in Inference. ⚙️
-#### Inference Example
+### Inference Example
+<!--
 |Reference Text|Reference Audio|Inference Text|Inference Audio|
 |:-------:|:-------:|:-------:|:-------:|
 |bạn và tôi đều như nhau nhé, rồi chúng ta đi đâu nè|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/1/refer_audio.mp3" type="audio/mpeg"></audio>|chào mọi người, mọi người khỏe không?|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/1/infer_audio.wav" type="audio/wav"></audio>|
 |Chúng thường sống hòa bình với các loài động vật khác, kể cả những loài săn mồi.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/2/refer_audio.mp3" type="audio/wav"></audio>|Tôi rất khỏe,cảm ơn mọi người đã quan tâm.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/2/infer_audio.mp3" type="audio/wav"></audio>|
 |Sau nhà Ngô, lần lượt các triều Đinh, Tiền Lê, Lý và Trần tổ chức chính quyền tương tự các triều đại Trung Hoa, lấy Phật giáo làm tôn giáo chính của quốc gia và cho truyền bá cả Nho giáo và Đạo giáo.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/3/refer_audio.mp3" type="audio/wav"></audio>|Nhà Tiền Lê, Lý và Trần đã chống trả các cuộc tấn công của nhà Tống và nhà Mông – Nguyên, đều thắng lợi và bảo vệ được Đại Việt.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/3/infer_audio.mp3" type="audio/wav"></audio>|
-|Cấu trúc sừng và mào là phổ biến ở tất cả các nhóm khủng long, và vài nhóm thậm chí còn phát triển các biến đổi bộ xương như giáp mô hoặc gai.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/4/refer_audio.mp3" type="audio/wav"></audio>|Người dân Đông Á cổ đại đã uống trà trong nhiều thế kỷ, thậm chí có thể là hàng thiên niên kỷ , trước khi sử dụng nó như một thức uống.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/4/infer_audio.mp3" type="audio/wav"></audio>|
+|Cấu trúc sừng và mào là phổ biến ở tất cả các nhóm khủng long, và vài nhóm thậm chí còn phát triển các biến đổi bộ xương như giáp mô hoặc gai.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/4/refer_audio.mp3" type="audio/wav"></audio>|Người dân Đông Á cổ đại đã uống trà trong nhiều thế kỷ, thậm chí có thể là hàng thiên niên kỷ , trước khi sử dụng nó như một thức uống.|<audio controls style="width: 150px;"><source src="https://raw.githubusercontent.com/danhtran2mind/Vi-F5-TTS/main/assets/examples/f5_tts/4/infer_audio.mp3" type="audio/wav"></audio>)|
+-->
+#### Example 1:
+- Reference Text: bạn và tôi đều như nhau nhé, rồi chúng ta đi đâu nè
+- Reference Audio:
 
+https://github.com/user-attachments/assets/f3a8d772-8a2f-461d-afdb-01d43cf3248f
 
-## Audio Example
+- Inference Text: chào mọi người, mọi người khỏe không?
+- Inference Audio:
 
-Listen to the reference audio: [Play Audio](https://huggingface.co/danhtran2mind/All-Assets/resolve/main/Vi-F5-TTS/examples/f5_tts/1/refer_audio.mp3)
+https://github.com/user-attachments/assets/8d83f2a0-2124-4903-9bc6-fc9154041884
 
-<div>
-<audio controls>
-  <source src="https://huggingface.co/danhtran2mind/All-Assets/resolve/main/Vi-F5-TTS/examples/f5_tts/1/refer_audio.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-</div>
+#### Example 2:
+- Reference Text: Chúng thường sống hòa bình với các loài động vật khác, kể cả những loài săn mồi.
+- Reference Audio:
 
-https://github.com/ExponentialML/Text-To-Video-Finetuning/assets/59846140/55608f6a-333a-458f-b7d5-94461c5da8bb
+https://github.com/user-attachments/assets/79a703b5-a160-4c70-85e0-6cb22f2bf71b
 
+- Inference Text: Tôi rất khỏe,cảm ơn mọi người đã quan tâm.
+- Inference Audio:
+
+https://github.com/user-attachments/assets/2e0566ad-d97a-441e-89fd-ef0c9729ac48
+
+#### Example 3:
+- Reference Text: Sau nhà Ngô, lần lượt các triều Đinh, Tiền Lê, Lý và Trần tổ chức chính quyền tương tự các triều đại Trung Hoa, lấy Phật giáo làm tôn giáo chính của quốc gia và cho truyền bá cả Nho giáo và Đạo giáo.
+- Reference Audio:
+
+https://github.com/user-attachments/assets/416ebae3-6d10-4746-a92f-4abdff2a6444
+
+- Inference Text: Nhà Tiền Lê, Lý và Trần đã chống trả các cuộc tấn công của nhà Tống và nhà Mông – Nguyên, đều thắng lợi và bảo vệ được Đại Việt.
+- Inference Audio:
+
+https://github.com/user-attachments/assets/ac8a47b2-cadf-44ca-8fcb-a4acd8040c96
+
+#### Example 4:
+- Reference Text: Cấu trúc sừng và mào là phổ biến ở tất cả các nhóm khủng long, và vài nhóm thậm chí còn phát triển các biến đổi bộ xương như giáp mô hoặc gai.
+- Reference Audio:
+
+https://github.com/user-attachments/assets/e71ca5e1-1bde-4c96-a5c7-96f869f5537e
+
+- Inference Text: Người dân Đông Á cổ đại đã uống trà trong nhiều thế kỷ, thậm chí có thể là hàng thiên niên kỷ , trước khi sử dụng nó như một thức uống.
+- Inference Audio:
+
+https://github.com/user-attachments/assets/44ef4bf4-1649-4df6-86d5-317819b2dd83
 
 ## Limitation
 
