@@ -161,7 +161,7 @@ Refer to the [Inference Documents](docs/inference/inference_doc.md) for detailed
 |Cấu trúc sừng và mào là phổ biến ở tất cả các nhóm khủng long, và vài nhóm thậm chí còn phát triển các biến đổi bộ xương như giáp mô hoặc gai.|<audio controls style="width: 150px;"><source src="assets/examples/f5_tts/4/refer_audio.mp3" type="audio/wav"></audio>|Người dân Đông Á cổ đại đã uống trà trong nhiều thế kỷ, thậm chí có thể là hàng thiên niên kỷ , trước khi sử dụng nó như một thức uống.|<audio controls style="width: 150px;"><source src="assets/examples/f5_tts/4/infer_audio.mp3" type="audio/mpeg"></audio>|
 
 - New
-<audio controls style="width: 150px;"><source src="assets/examples/f5_tts/4/infer_audio.mp3" type="audio/mpeg"></audio>
+<audio controls style="width: 150px;"><source src="assets/examples/f5_tts/4/infer_audio.mp3" type="audio/wav"></audio>
 
 ## Limitation
 
