@@ -17,6 +17,7 @@ safetensors==0.5.2
 soundfile==0.13.1
 tomli==2.2.1
 torch==2.4.0
+torchvision==0.19.0
 torchaudio==2.4.0
 torchcodec==0.4.0
 torchdiffeq==0.2.5

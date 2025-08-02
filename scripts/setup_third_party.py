@@ -44,7 +44,11 @@ def main(args):
     shutil.move(os.path.join(temp_f5_tts_target_dir, "src", "f5_tts"), f5_tts_target_dir)
     shutil.copytree(os.path.join(temp_f5_tts_target_dir, "data"), "./data", dirs_exist_ok=True)
     # Remove the parent directory
-    # shutil.rmtree(temp_f5_tts_target_dir)
+    # Remove the nested f5_tts directory
+    if os.path.exists(os.path.join(f5_tts_target_dir, "f5_tts")):
+        shutil.rmtree(os.path.join(f5_tts_target_dir, "f5_tts"), onerror=handle_remove_readonly)
+
+    # Remove the parent directory
     shutil.rmtree(temp_f5_tts_target_dir, onerror=handle_remove_readonly)
 
 if __name__ == "__main__":
