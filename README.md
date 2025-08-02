@@ -40,13 +40,13 @@ Vietnamese F5-TTS (Vi-F5-TTS) is a fine-tuned text-to-speech model for Vietnames
 [![Open in SageMaker](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/danhtran2mind/Vi-F5-TTS/blob/main/notebooks/vi-fine-tuned-t5-tts.ipynb)
 [![Open in Deepnote](https://deepnote.com/buttons/launch-in-deepnote-small.svg)](https://deepnote.com/launch?url=https://github.com/danhtran2mind/Vi-F5-TTS/blob/main/notebooks/vi-fine-tuned-t5-tts.ipynb)
 [![JupyterLab](https://img.shields.io/badge/Launch-JupyterLab-orange?logo=Jupyter)](https://mybinder.org/v2/gh/danhtran2mind/Vi-F5-TTS/main?filepath=notebooks/vi-fine-tuned-t5-tts.ipynb)
-[![Open in Gradient](https://assets.paperspace.io/img/gradient-badge.svg)](https://console.paperspace.com/github/danhtran2mind/Text2Video-Ghibli-style/blob/main/notebooks/vi-fine-tuned-t5-tts.ipynb)
+[![Open in Gradient](https://assets.paperspace.io/img/gradient-badge.svg)](https://console.paperspace.com/github/danhtran2mind/Vi-F5-TTS/blob/main/notebooks/vi-fine-tuned-t5-tts.ipynb)
 [![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danhtran2mind/Vi-F5-TTS/main)
-[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/Vi-F5-TTS/blob/main/notebooks/vi-fine-tuned-t5-tts.ipynb)
 [![Open In Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/notebooks/welcome?src=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2FVi-F5-TTS/blob/main/notebooks/vi-fine-tuned-t5-tts.ipynb)
+[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/danhtran2mind/Vi-F5-TTS/blob/main/notebooks/vi-fine-tuned-t5-tts.ipynb)
 
 ## Dataset
-You can explore more in this HuggingFace Dataset available at the given link for further details: [![HuggingFace Dataset](https://img.shields.io/badge/HuggingFace-htdung167%2Fvin100h--preprocessed--v2-yellow?style=flat&logo=huggingface)](https://huggingface.co/htdung167/vin100h-preprocessed-v2).
+You can explore more in this HuggingFace Dataset available at the given link for further details: [![HuggingFace Dataset](https://img.shields.io/badge/HuggingFace-htdung167%2Fvin100h--preprocessed--v2-yellow?style=flat&logo=huggingface)](https://huggingface.co/datasets/htdung167/vin100h-preprocessed-v2).
 
 ## Demonstration
 Experience the magic of Vietnames Text to Speech from:  
