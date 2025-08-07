@@ -48,6 +48,9 @@ Vietnamese F5-TTS (Vi-F5-TTS) is a fine-tuned text-to-speech model for Vietnames
 ## Dataset
 You can explore more in this HuggingFace Dataset available at the given link for further details: [![HuggingFace Dataset](https://img.shields.io/badge/HuggingFace-htdung167%2Fvin100h--preprocessed--v2-yellow?style=flat&logo=huggingface)](https://huggingface.co/datasets/htdung167/vin100h-preprocessed-v2).
 
+## Base Model
+This repository is built upon the F5-TTS model, originally developed by [![GitHub Repo](https://img.shields.io/badge/GitHub-SWivid%2FF5--TTS-blue?style=flat&logo=github)](https://github.com/SWivid/F5-TTS). For more details, explore the model on the [![HuggingFace Model](https://img.shields.io/badge/HuggingFace-SWivid%2FF5--TTS-yellow?logo=huggingface)](https://huggingface.co/SWivid/F5-TTS).
+
 ## Demonstration
 Experience the magic of Vietnames Text to Speech from:  
 - **HuggingFace Space**: [![HuggingFace Space Demo](https://img.shields.io/badge/HuggingFace-danhtran2mind%2F/Vi--F5--TTS-yellow?style=flat&logo=huggingface)](https://huggingface.co/spaces/danhtran2mind/Vi-F5-TTS)
