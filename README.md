@@ -1,4 +1,4 @@
-# Vietnamese F5-TTS🗣️ (Vi-F5-TTS)
+# Vietnamese F5-TTS 🗣️ (Vi-F5-TTS)
 
 [![GitHub Stars](https://img.shields.io/github/stars/danhtran2mind/Vi-F5-TTS?style=social&label=Repo%20Stars)](https://github.com/danhtran2mind/Vi-F5-TTS/stargazers)
 ![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Fdanhtran2mind%2FVi-F5-TTS&label=Repo+Views&icon=github&color=%236f42c1&message=&style=social&tz=UTC)
